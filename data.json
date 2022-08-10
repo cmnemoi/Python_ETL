@@ -1,0 +1,230 @@
+[
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"A 44-year-old man with erythema of the face diphenhydramine, neck, and chest, weakness, and palpitations",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2019"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Journal of emergency nursing",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2019"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"An evaluation of benadryl, pyribenzamine, and other so-called diphenhydramine antihistaminic drugs in the treatment of allergy.",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2019"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Journal of emergency nursing",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2019"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Diphenhydramine hydrochloride helps symptoms of ciguatera fish poisoning.",
+        "relationship":"REFERENCED IN",
+        "date":"01-02-2019"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"The Journal of pediatrics",
+        "relationship":"REFERENCED IN",
+        "date":"01-02-2019"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Use of Diphenhydramine as an Adjunctive Sedative for Colonoscopy in Patients Chronically on Opioids",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Journal of emergency nursing",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Phase 2 Study IV QUZYTTIR™ (Cetirizine Hydrochloride Injection) vs V Diphenhydramine",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Journal of emergency nursing",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Feasibility of a Randomized Controlled Clinical Trial Comparing the Use of Cetirizine to Replace Diphenhydramine in the Prevention of Reactions Related to Paclitaxel",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"DIPHENHYDRAMINE",
+        "target":"Journal of emergency nursing",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"TETRACYCLINE",
+        "target":"Tetracycline Resistance Patterns of Lactobacillus buchneri Group Strains.",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"TETRACYCLINE",
+        "target":"Journal of food protection",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"TETRACYCLINE",
+        "target":"Appositional Tetracycline bone formation rates in the Beagle.",
+        "relationship":"REFERENCED IN",
+        "date":"01-02-2020"
+    },
+    {
+        "source":"TETRACYCLINE",
+        "target":"American journal of veterinary research",
+        "relationship":"REFERENCED IN",
+        "date":"01-02-2020"
+    },
+    {
+        "source":"TETRACYCLINE",
+        "target":"Rapid reacquisition of contextual fear following extinction in mice: effects of amount of extinction, tetracycline acute ethanol withdrawal, and ethanol intoxication.",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"TETRACYCLINE",
+        "target":"Psychopharmacology",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"ETHANOL",
+        "target":"Rapid reacquisition of contextual fear following extinction in mice: effects of amount of extinction, tetracycline acute ethanol withdrawal, and ethanol intoxication.",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"ETHANOL",
+        "target":"Psychopharmacology",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"ATROPINE",
+        "target":"Comparison of pressure BETAMETHASONE release, phonophoresis and dry needling in treatment of latent myofascial trigger point of upper trapezius ATROPINE muscle.",
+        "relationship":"REFERENCED IN",
+        "date":"03-01-2020"
+    },
+    {
+        "source":"ATROPINE",
+        "target":"The journal of maternal-fetal & neonatal medicine",
+        "relationship":"REFERENCED IN",
+        "date":"03-01-2020"
+    },
+    {
+        "source":"EPINEPHRINE",
+        "target":"The High Cost of Epinephrine Autoinjectors and Possible Alternatives.",
+        "relationship":"REFERENCED IN",
+        "date":"02-01-2020"
+    },
+    {
+        "source":"EPINEPHRINE",
+        "target":"The journal of allergy and clinical immunology. In practice",
+        "relationship":"REFERENCED IN",
+        "date":"02-01-2020"
+    },
+    {
+        "source":"EPINEPHRINE",
+        "target":"Time to epinephrine treatment is associated with the risk of mortality in children who achieve sustained ROSC after traumatic out-of-hospital cardiac arrest.",
+        "relationship":"REFERENCED IN",
+        "date":"03-01-2020"
+    },
+    {
+        "source":"EPINEPHRINE",
+        "target":"The journal of allergy and clinical immunology. In practice",
+        "relationship":"REFERENCED IN",
+        "date":"03-01-2020"
+    },
+    {
+        "source":"EPINEPHRINE",
+        "target":"Tranexamic Acid Versus Epinephrine During Exploratory Tympanotomy",
+        "relationship":"REFERENCED IN",
+        "date":"27-04-2020"
+    },
+    {
+        "source":"EPINEPHRINE",
+        "target":"Journal of emergency nursing",
+        "relationship":"REFERENCED IN",
+        "date":"27-04-2020"
+    },
+    {
+        "source":"ISOPRENALINE",
+        "target":"Gold nanoparticles synthesized from Euphorbia fischeriana root by green route method alleviates the isoprenaline hydrochloride induced myocardial infarction in rats.",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"ISOPRENALINE",
+        "target":"Journal of photochemistry and photobiology. B, Biology",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"BETAMETHASONE",
+        "target":"Clinical implications of umbilical artery Doppler changes after betamethasone administration",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"BETAMETHASONE",
+        "target":"The journal of maternal-fetal & neonatal medicine",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"BETAMETHASONE",
+        "target":"Effects of Topical Application of Betamethasone on Imiquimod-induced Psoriasis-like Skin Inflammation in Mice.",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"BETAMETHASONE",
+        "target":"Journal of back and musculoskeletal rehabilitation",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"BETAMETHASONE",
+        "target":"Comparison of pressure BETAMETHASONE release, phonophoresis and dry needling in treatment of latent myofascial trigger point of upper trapezius ATROPINE muscle.",
+        "relationship":"REFERENCED IN",
+        "date":"03-01-2020"
+    },
+    {
+        "source":"BETAMETHASONE",
+        "target":"The journal of maternal-fetal & neonatal medicine",
+        "relationship":"REFERENCED IN",
+        "date":"03-01-2020"
+    },
+    {
+        "source":"BETAMETHASONE",
+        "target":"Preemptive Infiltration With Betamethasone and Ropivacaine for Postoperative Pain in Laminoplasty or ",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    },
+    {
+        "source":"BETAMETHASONE",
+        "target":"Hôpitaux Universitaires de Genève",
+        "relationship":"REFERENCED IN",
+        "date":"01-01-2020"
+    }
+]

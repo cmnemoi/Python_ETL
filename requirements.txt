@@ -1,2 +1,4 @@
 pandas==1.4.3
 tqdm==4.64.0
+networkX==2.8.5
+matplotlib==3.5.2
