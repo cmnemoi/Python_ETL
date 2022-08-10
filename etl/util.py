@@ -49,3 +49,43 @@ def get_article_date_from_data(data: dict[str, pd.DataFrame], article_name: str)
         return data["pubmed"][data["pubmed"]["title"] == article_name]["date"].values[0]
     except IndexError:
         return data["clinical_trials"][data["clinical_trials"]["scientific_title"] == article_name]["date"].values[0]
+
+def get_drug_info_from_name(drug: str, data: pd.DataFrame) -> dict[str, str]:
+    """
+    Get the drug info from its name
+    
+    Parameters
+    ----------
+    drug : str
+        The drug name.
+    data : pd.DataFrame
+        The dataframe containing the drug info.
+
+    Returns
+    -------
+    dict[str, str]
+        The drug info.
+    """
+    return data["drugs"][data["drugs"]["drug"] == drug].to_dict("records")[0]
+
+def get_article_info_from_name(article: str, data: pd.DataFrame) -> dict[str, str]:
+    """
+    Get the article info from its name
+    
+    Parameters
+    ----------
+    article : str
+        The article name.
+    data : pd.DataFrame
+        The dataframe containing the article info.
+
+    Returns
+    -------
+    dict[str, str]
+        The article info.
+    """
+    try:
+        return data["clinical_trials"][data["clinical_trials"]["scientific_title"] == article].to_dict("records")[0]
+    except IndexError:
+        return data["pubmed"][data["pubmed"]["title"] == article].to_dict("records")[0]
+

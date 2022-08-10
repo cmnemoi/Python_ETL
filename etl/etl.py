@@ -11,6 +11,8 @@ from tqdm import tqdm
 
 from etl.enums import ColumnTypesEnum
 from etl.util import (
+    get_article_info_from_name,
+    get_drug_info_from_name,
     remove_file_extension,
     get_article_journal_from_data,
     get_article_date_from_data
@@ -189,7 +191,7 @@ class ETL:
 
         articles_nodes = pubmed_articles_nodes + clinical_trials_nodes
 
-        graph_dataframe = pd.DataFrame(columns=["source", "target", "relationship", "date"])
+        graph_dataframe = pd.DataFrame()
         for drug in drug_nodes:
             for article in articles_nodes:
                 if drug.lower() in article.lower():
@@ -198,17 +200,9 @@ class ETL:
 
                     graph_dataframe = graph_dataframe.append(
                         {
-                            "source": drug, 
-                            "target": article, 
-                            "relationship": "REFERENCED IN", 
-                            "date": date
-                        }, 
-                        ignore_index=True
-                    )
-                    graph_dataframe = graph_dataframe.append(
-                        {
-                            "source": drug, 
-                            "target": journal, 
+                            "drug": get_drug_info_from_name(drug, data), 
+                            "article": get_article_info_from_name(article, data),
+                            "journal": journal,
                             "relationship": "REFERENCED IN", 
                             "date": date
                         }, 
