@@ -11,7 +11,9 @@ from tqdm import tqdm
 
 from etl.enums import ColumnTypesEnum
 from etl.util import (
-    remove_file_extension
+    remove_file_extension,
+    get_article_journal_from_data,
+    get_article_date_from_data
 )
 
 class ETL:
@@ -84,10 +86,12 @@ class ETL:
         for file_name in tqdm(data.keys()):
             data[file_name] = self.__apply__technical_constraints__(data[file_name])
             data[file_name] = self.__apply__functional_constraints__(data[file_name])
+
+        final_data = self.__create_graph_oriented_dataframe__(data)
         
         print("Data transformed successfully.")
 
-        return data
+        return final_data
 
     def __apply__technical_constraints__(self, data: pd.DataFrame) -> pd.DataFrame:
         """
@@ -134,6 +138,54 @@ class ETL:
         data = self.__remove_non_utf_8_characters__(data)
         
         return data
+
+    def __create_graph_oriented_dataframe__(self, data: dict[str, pd.DataFrame]) -> pd.DataFrame:
+        """
+        Create a graph-oriented pandas DataFrame from the data.
+        
+        Parameters
+        ----------
+        data : dict[str, pd.DataFrame]
+            The dictionary containing the data.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The graph-oriented pandas DataFrame.
+        """
+        drug_nodes = [drug for drug in data["drugs"]["drug"]]
+        pubmed_articles_nodes = [pubmed_article for pubmed_article in data["pubmed"]["title"]]
+        clinical_trials_nodes = [clinical_trial for clinical_trial in data["clinical_trials"]["scientific_title"]]
+
+        articles_nodes = pubmed_articles_nodes + clinical_trials_nodes
+
+        graph_dataframe = pd.DataFrame(columns=["source", "target", "relationship", "date"])
+        for drug in drug_nodes:
+            for article in articles_nodes:
+                if drug.lower() in article.lower():
+                    journal = get_article_journal_from_data(data, article)
+                    date = get_article_date_from_data(data, article)
+
+                    graph_dataframe = graph_dataframe.append(
+                        {
+                            "source": drug, 
+                            "target": article, 
+                            "relationship": "REFERENCED IN", 
+                            "date": date
+                        }, 
+                        ignore_index=True
+                    )
+                    graph_dataframe = graph_dataframe.append(
+                        {
+                            "source": drug, 
+                            "target": journal, 
+                            "relationship": "REFERENCED IN", 
+                            "date": date
+                        }, 
+                        ignore_index=True
+                    )
+
+        return graph_dataframe
 
     def __add_surrogate_key__(self, data: pd.DataFrame) -> pd.DataFrame:
         """
