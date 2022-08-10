@@ -9,8 +9,8 @@ import pandas as pd
 
 from tqdm import tqdm
 
-from enums import ColumnTypesEnum
-from util import (
+from etl.enums import ColumnTypesEnum
+from etl.util import (
     remove_file_extension
 )
 
@@ -61,8 +61,8 @@ class ETL:
             - Force column types
             - Drop duplicates
         - Functional constraints:
-            - Drop critical missing values
-            - Check id unicity
+            - Check primary key unicity
+        - Drop primary key missing rows
         - Data structuration:
             - Create a graph oriented pandas DataFrame
         
@@ -105,6 +105,28 @@ class ETL:
 
         data = self.__force_column_types__(data)
         data = data.drop_duplicates()
+        
+        return data
+
+    def __apply__functional_constraints__(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Apply functional constraints to the data.
+        - Check primary key unicity
+        - Drop primary key missing rows
+        
+        Parameters
+        ----------
+        data : pd.DataFrame
+            The data.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The data with the applied constraints.
+        """
+
+        data = self.__drop_critical_missing_values__(data)
+        data = self.__check_id_unicity__(data)
         
         return data
 

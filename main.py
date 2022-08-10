@@ -3,7 +3,7 @@ This file contains the main function.
 Launch the program with the following command: `python main.py`
 """
 
-from etl import ETL
+from etl.etl import ETL
 
 if __name__ == '__main__':
     data_folder = input('Enter the path to the data folder: ')
