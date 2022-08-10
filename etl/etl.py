@@ -62,6 +62,7 @@ class ETL:
             - Drop duplicates
         - Functional constraints:
             - Add a surrerogate key
+            - Normalize date formats
         - Drop primary key missing rows
         - Data structuration:
             - Create a graph oriented pandas DataFrame
@@ -113,6 +114,7 @@ class ETL:
         """
         Apply functional constraints to the data.
         - Add a surrerogate key
+        - Normalize date formats
         
         Parameters
         ----------
@@ -126,6 +128,7 @@ class ETL:
         """
 
         data = self.__add_surrogate_key__(data)
+        data = self.__normalize_date_formats__(data)
         
         return data
 
@@ -146,6 +149,29 @@ class ETL:
 
         data.insert(0, "surrerogate_id", data.index)
         
+        return data
+
+    def __normalize_date_formats__(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Normalize dates to the format DD-MM-YYYY.
+        
+        Parameters
+        ----------
+        data : pd.DataFrame
+            The data.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The data with the normalized format dates.
+        """
+        
+        try:
+            data["date"] = pd.to_datetime(data["date"]).apply(lambda x: x.strftime("%d-%m-%Y")).astype(str)
+        except KeyError:
+            #if date column is not present, do nothing
+            return data
+
         return data
 
 
