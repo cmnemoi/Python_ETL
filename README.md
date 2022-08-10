@@ -17,6 +17,10 @@ On peut également générer un graphe à partir du fichier obtenu à l'aide de 
 
 ![graphe](images/graph.png)
 
+## Insights
+
+Le journal mentionnant le plus de médicaments différents est "Journal of emergency nursing" avec 6 occurences.
+
 ## Exécuter
 
 - `pip install -r requirements.txt`
