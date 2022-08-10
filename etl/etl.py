@@ -20,8 +20,20 @@ class ETL:
     def __init__(self):
         """ETL Instance. Extract, transform and load data to a graph-oriented JSON file."""
         pass
+
+    def run(self) -> bool:
+        """Run the ETL."""
+
+        data_folder = input('Enter the path to the data folder: ')
+        if_exists = input('Do you want to overwrite the existing data? (y/[n]): ')
+        if_exists = "replace" if if_exists == "y" else "append"
+
+        data = self.__extract__(data_folder, if_exists)
+        data = self.__transform__(data)
+
+        return self.__load__(data)
     
-    def extract(self, folder_path: str, if_exists: str="append") -> dict[str, pd.DataFrame]:
+    def __extract__(self, folder_path: str, if_exists: str="append") -> dict[str, pd.DataFrame]:
         """
         Extract data from CSV or JSON files and returns a Pandas DataFrame per file into a dictionary.
 
@@ -56,7 +68,7 @@ class ETL:
 
         return data
 
-    def transform(self, data: dict[str, pd.DataFrame]) -> pd.DataFrame:
+    def __transform__(self, data: dict[str, pd.DataFrame]) -> pd.DataFrame:
         """
         Apply transformations to the data.
         - Technical constraints:
@@ -92,6 +104,24 @@ class ETL:
         print("Data transformed successfully.")
 
         return final_data
+
+    def __load__(self, data: pd.DataFrame) -> bool:
+        """
+        Load the data to a graph-oriented JSON file.
+        
+        Parameters
+        ----------
+        data : pd.DataFrame
+            The data.
+        """
+
+        print("Loading data to JSON file...")
+
+        data.to_json("data.json", orient="records", force_ascii=False, indent=4)
+
+        print("Data loaded to data.json successfully.")
+
+        return True
 
     def __apply__technical_constraints__(self, data: pd.DataFrame) -> pd.DataFrame:
         """
