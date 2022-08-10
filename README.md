@@ -8,5 +8,5 @@ L'ETL est composé des trois composants suivants :
     * vérifcation des contraintes fonctionnelles métier (exemple : chaque étude doit avoir un titre)
     * structuration des données 
         * création d'un référentiel unique (noms des variables)
-        * base de données orientée graphe (format Neo4j) 
+        * base de données orientée graphe (format NetworkX "edgelist") 
 * **Load** : chargement des données dans leur emplacement final. Ici dans un fichier JSON.
