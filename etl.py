@@ -1,5 +1,5 @@
 """
-This file contains the ETL class, used to extract, transform, and load data.
+This file contains the ETL class, used to extract, transform, and load data from CSV and JSON files.
 """
 
 import os
@@ -9,6 +9,7 @@ import pandas as pd
 
 from tqdm import tqdm
 
+from enums import ColumnTypesEnum
 from util import (
     remove_file_extension
 )
@@ -52,6 +53,81 @@ class ETL:
         print("Data extracted successfully.")
 
         return data
+
+    def transform(self, data: dict[str, pd.DataFrame]) -> pd.DataFrame:
+        """
+        Apply transformations to the data.
+        - Technical constraints:
+            - Force column types
+            - Drop duplicates
+        - Functional constraints:
+            - Drop critical missing values
+            - Check id unicity
+        - Data structuration:
+            - Create a graph oriented pandas DataFrame
+        
+        Parameters
+        ----------
+        data : dict[str, pd.DataFrame]
+            The dictionary containing the data.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The transformed data as a graph-oriented pandas DataFrame.
+        """
+
+        print("Transforming data...")
+
+        for file_name in tqdm(data.keys()):
+            data[file_name] = self.__apply__technical_constraints__(data[file_name])
+        
+        print("Data transformed successfully.")
+
+        return data
+
+    def __apply__technical_constraints__(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Apply technical constraints to the data.
+        - Force column types
+        - Drop duplicates
+        
+        Parameters
+        ----------
+        data : pd.DataFrame
+            The data.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The data with the applied constraints.
+        """
+
+        data = self.__force_column_types__(data)
+        data = data.drop_duplicates()
+        
+        return data
+
+
+    def __force_column_types__(self, dataframe: pd.DataFrame) -> pd.DataFrame:
+        """
+        Force column types.
+        
+        Parameters
+        ----------
+        dataframe : pd.DataFrame
+            The dataframe.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The dataframe with the forced column types.
+        """
+
+        for column in dataframe:
+            dataframe[column] = dataframe[column].astype(ColumnTypesEnum[column].value)
+
+        return dataframe
 
 
     def __extract_data_from_csv__(self, data: dict[str, pd.DataFrame], file_path: str, if_exists: str) -> pd.DataFrame:
