@@ -11,3 +11,4 @@ if __name__ == '__main__':
     if_exists = "replace" if if_exists == "y" else "append"
 
     data = ETL().extract(data_folder, if_exists)
+    data = ETL().transform(data)

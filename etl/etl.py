@@ -61,7 +61,7 @@ class ETL:
             - Force column types
             - Drop duplicates
         - Functional constraints:
-            - Check primary key unicity
+            - Add a surrerogate key
         - Drop primary key missing rows
         - Data structuration:
             - Create a graph oriented pandas DataFrame
@@ -81,6 +81,7 @@ class ETL:
 
         for file_name in tqdm(data.keys()):
             data[file_name] = self.__apply__technical_constraints__(data[file_name])
+            data[file_name] = self.__apply__functional_constraints__(data[file_name])
         
         print("Data transformed successfully.")
 
@@ -111,8 +112,7 @@ class ETL:
     def __apply__functional_constraints__(self, data: pd.DataFrame) -> pd.DataFrame:
         """
         Apply functional constraints to the data.
-        - Check primary key unicity
-        - Drop primary key missing rows
+        - Add a surrerogate key
         
         Parameters
         ----------
@@ -125,8 +125,26 @@ class ETL:
             The data with the applied constraints.
         """
 
-        data = self.__drop_critical_missing_values__(data)
-        data = self.__check_id_unicity__(data)
+        data = self.__add_surrogate_key__(data)
+        
+        return data
+
+    def __add_surrogate_key__(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Add a surrogate key to the data.
+        
+        Parameters
+        ----------
+        data : pd.DataFrame
+            The data.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The data with the surrogate key.
+        """
+
+        data.insert(0, "surrerogate_id", data.index)
         
         return data
 
