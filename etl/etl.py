@@ -63,6 +63,7 @@ class ETL:
         - Functional constraints:
             - Add a surrerogate key
             - Normalize date formats
+            - Remove non utf_8 characters
         - Drop primary key missing rows
         - Data structuration:
             - Create a graph oriented pandas DataFrame
@@ -115,6 +116,7 @@ class ETL:
         Apply functional constraints to the data.
         - Add a surrerogate key
         - Normalize date formats
+        - Remove non utf_8 characters
         
         Parameters
         ----------
@@ -129,6 +131,7 @@ class ETL:
 
         data = self.__add_surrogate_key__(data)
         data = self.__normalize_date_formats__(data)
+        data = self.__remove_non_utf_8_characters__(data)
         
         return data
 
@@ -174,6 +177,26 @@ class ETL:
 
         return data
 
+    def __remove_non_utf_8_characters__(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Remove non utf_8 characters.
+        
+        Parameters
+        ----------
+        data : pd.DataFrame
+            The data.
+        
+        Returns
+        -------
+        pd.DataFrame
+            The data with the removed non utf_8 characters.
+        """
+
+        for column in data.columns:
+            if data[column].dtype == object:
+                data[column] = data[column].apply(lambda x: x.split("\\")[0])
+
+        return data
 
     def __force_column_types__(self, dataframe: pd.DataFrame) -> pd.DataFrame:
         """
