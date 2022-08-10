@@ -12,13 +12,59 @@ def load_data() -> pd.DataFrame:
     Loads the data.json file.
     """
     with open('data.json', 'r', encoding="UTF-8") as f:
-        return pd.read_json(f)
+        return pd.read_json(f, convert_dates=False)
+
+def create_pandas_edgelist(data: pd.DataFrame) -> pd.DataFrame:
+    """
+    Creates a pandas edgelist DataFrame from the data.json file.
+    """
+    pandas_edgelist = pd.DataFrame()
+
+    for index, row in data.iterrows():
+        try:
+            pandas_edgelist = pandas_edgelist.append(
+                {
+                    "source": row["drug"]["drug"], 
+                    "target": row["article"]["title"], 
+                    "relationship": row["relationship"], 
+                    "date": row["date"]
+                },
+                ignore_index=True
+            )
+        except KeyError:
+            pandas_edgelist = pandas_edgelist.append(
+                {
+                    "source": row["drug"]["drug"], 
+                    "target": row["article"]["scientific_title"], 
+                    "relationship": row["relationship"], 
+                    "date": row["date"]
+                },
+                ignore_index=True
+            )
+
+    for index, row in data.iterrows():
+        pandas_edgelist = pandas_edgelist.append(
+                {
+                    "source": row["drug"]["drug"], 
+                    "target": row["journal"], 
+                    "relationship": row["relationship"], 
+                    "date": row["date"]
+                },
+                ignore_index=True
+            )
+
+    return pandas_edgelist
 
 def graph() -> bool:
     """
     Draws a graph of the data.json file.
     """
-    graph = nx.from_pandas_edgelist(load_data(), edge_attr=True, create_using=nx.DiGraph())
+    data = load_data()
+    graph = nx.from_pandas_edgelist(
+        create_pandas_edgelist(data),
+        edge_attr=True, 
+        create_using=nx.DiGraph()
+    )
 
     pos = nx.spring_layout(graph)
 
