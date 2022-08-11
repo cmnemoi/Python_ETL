@@ -23,6 +23,8 @@ Le journal mentionnant le plus de médicaments différents est "Journal of emerg
 
 ## Exécuter
 
+Nécessite Python **3.10**
+
 - `pip install -r requirements.txt`
 - `python main.py`
 
