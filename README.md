@@ -23,8 +23,11 @@ Le journal mentionnant le plus de médicaments différents est "Journal of emerg
 
 ## Exécuter
 
-Nécessite Python **3.10**
+Nécessite Python **3.11**
 
+- `git clone https://github.com/cmnemoi/Python_ETL.git`
+- `python3 -m venv .venv`
+- `source .venv/bin/activate`
 - `pip install -r requirements.txt`
 - `python main.py`
 
