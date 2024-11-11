@@ -7,12 +7,14 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
 
+
 def load_data() -> pd.DataFrame:
     """
     Loads the data.json file.
     """
-    with open('data.json', 'r', encoding="UTF-8") as f:
+    with open("data.json", "r", encoding="UTF-8") as f:
         return pd.read_json(f, convert_dates=False)
+
 
 def create_pandas_edgelist(data: pd.DataFrame) -> pd.DataFrame:
     """
@@ -24,36 +26,37 @@ def create_pandas_edgelist(data: pd.DataFrame) -> pd.DataFrame:
         try:
             pandas_edgelist = pandas_edgelist.append(
                 {
-                    "source": row["drug"]["drug"], 
-                    "target": row["article"]["title"], 
-                    "relationship": row["relationship"], 
-                    "date": row["date"]
+                    "source": row["drug"]["drug"],
+                    "target": row["article"]["title"],
+                    "relationship": row["relationship"],
+                    "date": row["date"],
                 },
-                ignore_index=True
+                ignore_index=True,
             )
         except KeyError:
             pandas_edgelist = pandas_edgelist.append(
                 {
-                    "source": row["drug"]["drug"], 
-                    "target": row["article"]["scientific_title"], 
-                    "relationship": row["relationship"], 
-                    "date": row["date"]
+                    "source": row["drug"]["drug"],
+                    "target": row["article"]["scientific_title"],
+                    "relationship": row["relationship"],
+                    "date": row["date"],
                 },
-                ignore_index=True
+                ignore_index=True,
             )
 
     for index, row in data.iterrows():
         pandas_edgelist = pandas_edgelist.append(
-                {
-                    "source": row["drug"]["drug"], 
-                    "target": row["journal"], 
-                    "relationship": row["relationship"], 
-                    "date": row["date"]
-                },
-                ignore_index=True
-            )
+            {
+                "source": row["drug"]["drug"],
+                "target": row["journal"],
+                "relationship": row["relationship"],
+                "date": row["date"],
+            },
+            ignore_index=True,
+        )
 
     return pandas_edgelist
+
 
 def graph() -> bool:
     """
@@ -61,25 +64,28 @@ def graph() -> bool:
     """
     data = load_data()
     graph = nx.from_pandas_edgelist(
-        create_pandas_edgelist(data),
-        edge_attr=True, 
-        create_using=nx.DiGraph()
+        create_pandas_edgelist(data), edge_attr=True, create_using=nx.DiGraph()
     )
 
     pos = nx.spring_layout(graph)
 
-    edge_labels = dict([((n1, n2), f'{attributes["relationship"]} the {attributes["date"]}')
-                    for n1, n2, attributes in graph.edges(data=True)])
+    edge_labels = dict(
+        [
+            ((n1, n2), f'{attributes["relationship"]} the {attributes["date"]}')
+            for n1, n2, attributes in graph.edges(data=True)
+        ]
+    )
 
     plt.figure(figsize=(12, 8))
 
     nx.draw_networkx(graph, pos, font_size=6, node_size=1000)
     nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels, font_size=5)
 
-    plt.show()  
+    plt.show()
 
     return True
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     if graph():
-        print('Graph created successfully.')
+        print("Graph created successfully.")
