@@ -1,0 +1,33 @@
+{
+    "restoreTerminals.terminals": [
+        {
+            "splitTerminals": [
+                {
+                    "name": "root",
+                },
+            ]
+        },
+        {
+            "splitTerminals": [
+                {
+                    "name": "watch tests",
+                    "commands": ["uv run ptw . --clear --now"]
+                },
+            ]
+        },
+        {
+            "splitTerminals": [
+                {
+                    "name": "aider",
+                    "commands": ["aider --env $HOME/.aider.env"]
+                },
+            ]
+        }
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
+
