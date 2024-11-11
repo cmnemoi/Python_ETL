@@ -1,0 +1,24 @@
+[project]
+name = "python-etl"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.9.2",
+    "networkx>=3.4.2",
+    "pandas>=2.2.3",
+    "tqdm>=4.67.0",
+]
+
+[dependency-groups]
+lint = [
+    "ruff>=0.7.3",
+]
+test = [
+    "pytest-cov>=6.0.0",
+    "pytest>=8.3.3",
+]
+dev = [
+    "pytest-watcher>=0.4.3",
+]
