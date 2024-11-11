@@ -1,5 +1,8 @@
 # Python_ETL
 
+[![Continous Integration](https://github.com/cmnemoi/python_project_template/actions/workflows/ci.yaml/badge.svg)](https://github.com/cmnemoi/python_project_template/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/github/cmnemoi/Python_ETL/graph/badge.svg?token=31F9TEL4OU)](https://codecov.io/github/cmnemoi/Python_ETL)
+
 L'objectif de ce repository est de créer un ETL (Extract-Transform-Load) rudimentaire en Python.
 L'ETL est composé des trois composants suivants : 
 * **Extract** : extraction des données sources vers des dataframes Pandas. Ici les données sources sont des fichiers plats (CSV, JSON).

@@ -12,7 +12,10 @@ def main() -> bool:
     """
     Main function.
     """
-    return ETL().run()
+    data_folder = input("Enter the path to the data folder: ")
+    if_exists = input("Do you want to overwrite the existing data? (y/[n]): ")
+
+    return ETL().run(data_folder, if_exists)
 
 
 def get_journal_which_quotes_the_most_amount_of_drugs(

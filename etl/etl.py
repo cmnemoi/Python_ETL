@@ -24,11 +24,9 @@ class ETL:
         """ETL Instance. Extract, transform and load data to a graph-oriented JSON file."""
         pass
 
-    def run(self) -> bool:
+    def run(self, data_folder: str, if_exists: str) -> bool:
         """Run the ETL."""
 
-        data_folder = input("Enter the path to the data folder: ")
-        if_exists = input("Do you want to overwrite the existing data? (y/[n]): ")
         if_exists = "replace" if if_exists == "y" else "append"
 
         data = self._extract(data_folder, if_exists)
@@ -111,7 +109,7 @@ class ETL:
             data[file_name] = self._apply_technical_constraints(data[file_name])
             data[file_name] = self._apply_functional_constraints_(data[file_name])
 
-        final_data = self._create_graph_oriented_dataframe_(data)
+        final_data = self._create_graph_oriented_dataframe(data)
 
         print("Data transformed successfully.")
 
@@ -176,12 +174,12 @@ class ETL:
         """
 
         data = self._add_surrogate_key(data)
-        data = self._normalize_date_formats_(data)
-        data = self._remove_non_utf_8_characters_(data)
+        data = self._normalize_date_formats(data)
+        data = self._remove_non_utf_8_characters(data)
 
         return data
 
-    def _create_graph_oriented_dataframe_(
+    def _create_graph_oriented_dataframe(
         self, data: dict[str, pd.DataFrame]
     ) -> pd.DataFrame:
         """
@@ -215,14 +213,23 @@ class ETL:
                     journal = get_article_journal_from_data(data, article)
                     date = get_article_date_from_data(data, article)
 
-                    graph_dataframe = graph_dataframe.append(
-                        {
-                            "drug": get_drug_info_from_name(drug, data),
-                            "article": get_article_info_from_name(article, data),
-                            "journal": journal,
-                            "relationship": "REFERENCED IN",
-                            "date": date,
-                        },
+                    graph_dataframe = pd.concat(
+                        [
+                            graph_dataframe,
+                            pd.DataFrame(
+                                data=[
+                                    {
+                                        "drug": get_drug_info_from_name(drug, data),
+                                        "article": get_article_info_from_name(
+                                            article, data
+                                        ),
+                                        "journal": journal,
+                                        "relationship": "REFERENCED IN",
+                                        "date": date,
+                                    }
+                                ]
+                            ),
+                        ],
                         ignore_index=True,
                     )
 
@@ -247,7 +254,7 @@ class ETL:
 
         return data
 
-    def _normalize_date_formats_(self, data: pd.DataFrame) -> pd.DataFrame:
+    def _normalize_date_formats(self, data: pd.DataFrame) -> pd.DataFrame:
         """
         Normalize dates to the format DD-MM-YYYY.
 
@@ -264,7 +271,7 @@ class ETL:
 
         try:
             data["date"] = (
-                pd.to_datetime(data["date"])
+                pd.to_datetime(data["date"], dayfirst=True, format="mixed")
                 .apply(lambda x: x.strftime("%d-%m-%Y"))
                 .astype(str)
             )
@@ -274,7 +281,7 @@ class ETL:
 
         return data
 
-    def _remove_non_utf_8_characters_(self, data: pd.DataFrame) -> pd.DataFrame:
+    def _remove_non_utf_8_characters(self, data: pd.DataFrame) -> pd.DataFrame:
         """
         Remove non utf_8 characters.
 

@@ -22,36 +22,57 @@ def create_pandas_edgelist(data: pd.DataFrame) -> pd.DataFrame:
     """
     pandas_edgelist = pd.DataFrame()
 
-    for index, row in data.iterrows():
+    for _, row in data.iterrows():
         try:
-            pandas_edgelist = pandas_edgelist.append(
-                {
-                    "source": row["drug"]["drug"],
-                    "target": row["article"]["title"],
-                    "relationship": row["relationship"],
-                    "date": row["date"],
-                },
+            pandas_edgelist = pd.concat(
+                [
+                    pandas_edgelist,
+                    pd.DataFrame(
+                        data=[
+                            {
+                                "source": row["drug"]["drug"],
+                                "target": row["article"]["scientific_title"],
+                                "relationship": row["relationship"],
+                                "date": row["date"],
+                            }
+                        ]
+                    ),
+                ],
                 ignore_index=True,
             )
         except KeyError:
-            pandas_edgelist = pandas_edgelist.append(
-                {
-                    "source": row["drug"]["drug"],
-                    "target": row["article"]["scientific_title"],
-                    "relationship": row["relationship"],
-                    "date": row["date"],
-                },
+            pandas_edgelist = pd.concat(
+                [
+                    pandas_edgelist,
+                    pd.DataFrame(
+                        data=[
+                            {
+                                "source": row["drug"]["drug"],
+                                "target": row["journal"],
+                                "relationship": row["relationship"],
+                                "date": row["date"],
+                            }
+                        ]
+                    ),
+                ],
                 ignore_index=True,
             )
 
-    for index, row in data.iterrows():
-        pandas_edgelist = pandas_edgelist.append(
-            {
-                "source": row["drug"]["drug"],
-                "target": row["journal"],
-                "relationship": row["relationship"],
-                "date": row["date"],
-            },
+    for _, row in data.iterrows():
+        pandas_edgelist = pd.concat(
+            [
+                pandas_edgelist,
+                pd.DataFrame(
+                    data=[
+                        {
+                            "source": row["drug"]["drug"],
+                            "target": row["journal"],
+                            "relationship": row["relationship"],
+                            "date": row["date"],
+                        }
+                    ]
+                ),
+            ],
             ignore_index=True,
         )
 
